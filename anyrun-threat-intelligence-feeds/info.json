@@ -1,148 +1,156 @@
 {
-    "name": "anyrun-threat-intelligence-feeds",
-    "version": "1.0.0",
-    "label": "ANY.RUN Threat Intelligence Feeds",
-    "description": "The ANY.RUN Threat Intelligence Feeds connector FortiSOAR users with continuously updated, high-fidelity IOCs (malicious IPs, domains, and URLs) extracted from live sandbox analyses across 15,000+ SOCs. This enables proactive defense against emerging threats with rich context including sandbox session links for faster triage and response. <br/><br/>With TI Feeds, you SOC can ensure: \n- Early threat detection using real-time IOCs from the latest emerging malware & phishing, catching attacks hours before they hit. \n- More effective Tier 1 as analysts will be able to resolve more alerts without escalation thanks to clear indicator context. \n- Lightning-fast MTTR with TTPs and behavior insights from sandbox reports, enabling automated triage and response in minutes.\n\n<br/><br/>This connector has a dependency on the <a href=\"/content-hub/all-content/?contentType=solutionpack&amp;tag=ThreatIntelManagement\" target=\"_blank\" rel=\"noopener\">Threat Intel Management Solution Pack</a>. Install the Solution Pack before enabling ingestion of Threat Feeds from this source.",
-    "publisher": "ANY.RUN",
-    "icon_small_name": "small.png",
-    "icon_large_name": "large.png",
-    "category": "Threat Intelligence",
-    "ingestion_supported": true,
-    "cs_compatible": true,
-    "ingestion_modes": [
-        "scheduled"
-    ],
-    "tags": [
-        "ThreatIntel",
-        "ThreatFeedsIngestion"
-             ],
-"ingestion_preferences": {
+  "name": "anyrun-threat-intelligence-feeds",
+  "version": "1.0.0",
+  "label": "ANY.RUN Threat Intelligence Feeds",
+  "description": "The ANY.RUN Threat Intelligence Feeds connector FortiSOAR users with continuously updated, high-fidelity IOCs (malicious IPs, domains, and URLs) extracted from live sandbox analyses across 15,000+ SOCs. This enables proactive defense against emerging threats with rich context including sandbox session links for faster triage and response. <br/><br/>With TI Feeds, you SOC can ensure: \n- Early threat detection using real-time IOCs from the latest emerging malware & phishing, catching attacks hours before they hit. \n- More effective Tier 1 as analysts will be able to resolve more alerts without escalation thanks to clear indicator context. \n- Lightning-fast MTTR with TTPs and behavior insights from sandbox reports, enabling automated triage and response in minutes.\n\n<br/><br/>This connector has a dependency on the <a href=\"/content-hub/all-content/?contentType=solutionpack&amp;tag=ThreatIntelManagement\" target=\"_blank\" rel=\"noopener\">Threat Intel Management Solution Pack</a>. Install the Solution Pack before enabling ingestion of Threat Feeds from this source.",
+  "publisher": "ANY.RUN",
+  "icon_small_name": "small.png",
+  "icon_large_name": "large.png",
+  "category": "Threat Intelligence",
+  "contributor": "Semen Shalnev",
+  "cs_approved": false,
+  "cs_compatible": true,
+  "ingestion_supported": true,
+  "ingestion_modes": [
+    "scheduled"
+  ],
+  "tags": [
+    "ThreatIntel",
+    "ThreatFeedsIngestion"
+  ],
+  "ingestion_preferences": {
     "modules": [
       "threat_intel_feeds",
       "indicators"
     ]
   },
-    "help_online": "https://github.com/fortinet-fortisoar/connector-anyrun-threat-intelligence-feeds",
-    "configuration": {
-        "fields": [
-            {
-                "title": "API Key",
-                "type": "password",
-                "name": "apiKey",
-                "required": true,
-                "visible": true,
-                "editable": true,
-                "value": null,
-                "tooltip": "ANY.RUN API Key in format: \"WmNfqnpo...2Sjon7mtvm8e \""
-            },
-            {
-                "title": "Verify SSL",
-                "type": "checkbox",
-                "name": "verify_ssl",
-                "required": false,
-                "visible": true,
-                "editable": true,
-                "value": true,
-                "tooltip": "Specifies whether the SSL certificate for the server is to be verified. By default, this option is set as True."
-            }
-        ]
-    },
-    "operations": [
+  "help_online": "",
+  "configuration": {
+    "fields": [
+      {
+        "title": "API Key",
+        "description": "API Key of the ANY.RUN endpoint server to connect and perform the automated operations.",
+        "type": "password",
+        "name": "apiKey",
+        "required": true,
+        "visible": true,
+        "editable": true,
+        "tooltip": "API Key of the ANY.RUN endpoint server to connect and perform the automated operations."
+      },
+      {
+        "title": "Verify SSL",
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not. By default, this option is set as True.",
+        "type": "checkbox",
+        "name": "verify_ssl",
+        "required": false,
+        "visible": true,
+        "editable": true,
+        "value": true,
+        "tooltip": "Specifies whether the SSL certificate for the server is to be verified or not. By default, this option is set as True."
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "fetch_indicators",
+      "title": "Fetch Indicators",
+      "description": "Retrieves all available indicators of a specific collection from ANY.RUN TAXII Server based on the collection type and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "fetch_indicators",
+      "api_output_schema": "get_output_schema",
+      "output_schema": {},
+      "parameters": [
         {
-            "operation": "fetch_indicators",
-            "title": "Fetch Indicators",
-            "description": "Retrieves all available indicators of a specific collection from ANY.RUN TAXII Server based on the collection type and other input parameters you have specified.",
-            "category": "investigation",
-            "annotation": "fetch_indicators",
-            "api_output_schema": "get_output_schema",
-            "output_schema": {},
-            "parameters": [
-                {
-                    "title": "Collection type",
-                    "type": "select",
-                    "name": "collectionType",
-                    "required": true,
-                    "visible": true,
-                    "editable": true,
-                    "value": "full",
-                    "tooltip": "Specify the type of the collection from which to retrieve the indicators.",
-                    "options": [
-                        "ip",
-                        "url",
-                        "domain",
-                        "full"
-                    ]
-                },
-                {
-                    "title": "Feed fetch depth",
-                    "type": "integer",
-                    "name": "feedFetchDepth",
-                    "required": false,
-                    "visible": true,
-                    "editable": true,
-                    "value": 30,
-                    "tooltip": "Select the period in days to retrieve indicators."
-                },
-                {
-                    "title": "Process Response As",
-                    "type": "select",
-                    "name": "output_mode",
-                    "required": false,
-                    "visible": true,
-                    "editable": true,
-                    "value": "Return as a JSON",
-                    "tooltip": "The Feed Data can either be returned as a JSON; written to a file on the FortiSOAR server; or Created as Feed Records in FortiSOAR",
-                    "options": [
-                        "Create as Feed Records in FortiSOAR",
-                        "Save to File",
-                        "Return as a JSON"
-                    ],
-                    "onchange": {
-                        "Create as Feed Records in FortiSOAR": [
-                            {
-                                "title": "Record Creation Playbook IRI",
-                                "description": "Specify the IRI of the Record Creation Playbook in Record Creation Playbook IRI field.",
-                                "tooltip": "Specify the IRI of the Record Creation Playbook in Record Creation Playbook IRI field.",
-                                "type": "text",
-                                "name": "create_pb_id",
-                                "required": false,
-                                "editable": true,
-                                "visible": true
-                            }
-                        ],
-                        "Return as a JSON": [],
-                        "Save to File": [
-                            {
-                                "title": "Filename",
-                                "name": "filename",
-                                "type": "text",
-                                "visible": true,
-                                "editable": true,
-                                "required": true,
-                                "placeholder": "Eg. feeds.json",
-                                "tooltip": "Specify the name of the file in which to save the feed information, in the Filename field. The file will be created under /tmp",
-                                "description": "Specify the name of the file in which to save the feed information, in the Filename field."
-                            }
-                        ]
-                    }
-                }
-            ],
-            "enabled": true,
-            "open": false
-        }
-    ],
-    "ingestion_config_schema": [
-        {
-            "title": "Ingestion Begin From",
-            "name": "last_pull_datetime",
-            "type": "datetime",
-            "tooltip": "Specify the Datetime after which you want to ingest feeds",
-            "required": true,
-            "editable": true,
-            "visible": true
+          "title": "Collection type",
+          "description": "Specify the type of the collection from which to retrieve the indicators. Possible values are IP, URL, Domain, or Full.",
+          "type": "select",
+          "name": "collectionType",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "value": "Full",
+          "tooltip": "Specify the type of the collection from which to retrieve the indicators. Possible values are IP, URL, Domain, or Full.",
+          "options": [
+            "IP",
+            "URL",
+            "Domain",
+            "Full"
+          ]
         },
+        {
+          "title": "Feed Fetch Depth",
+          "description": "Select the period in days to retrieve indicators.",
+          "type": "integer",
+          "name": "feedFetchDepth",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": 30,
+          "tooltip": "Select the period in days to retrieve indicators."
+        },
+        {
+          "title": "Process Response As",
+          "description": "The Feed Data can either be returned as a JSON; written to a file on the FortiSOAR server; or Created as Feed Records in FortiSOAR",
+          "type": "select",
+          "name": "output_mode",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": "Return as a JSON",
+          "tooltip": "The Feed Data can either be returned as a JSON; written to a file on the FortiSOAR server; or Created as Feed Records in FortiSOAR",
+          "options": [
+            "Create as Feed Records in FortiSOAR",
+            "Save to File",
+            "Return as a JSON"
+          ],
+          "onchange": {
+            "Create as Feed Records in FortiSOAR": [
+              {
+                "title": "Record Creation Playbook IRI",
+                "description": "Specify the IRI of the Record Creation Playbook in Record Creation Playbook IRI field.",
+                "tooltip": "Specify the IRI of the Record Creation Playbook in Record Creation Playbook IRI field.",
+                "type": "text",
+                "name": "create_pb_id",
+                "required": false,
+                "editable": true,
+                "visible": true
+              }
+            ],
+            "Return as a JSON": [],
+            "Save to File": [
+              {
+                "title": "Filename",
+                "name": "filename",
+                "type": "text",
+                "visible": true,
+                "editable": true,
+                "required": true,
+                "placeholder": "Eg. feeds.json",
+                "tooltip": "Specify the name of the file in which to save the feed information, in the Filename field. The file will be created under /tmp",
+                "description": "Specify the name of the file in which to save the feed information, in the Filename field."
+              }
+            ]
+          }
+        }
+      ],
+      "enabled": true,
+      "open": false
+    }
+  ],
+  "ingestion_config_schema": [
+    {
+      "title": "Ingestion Begin From",
+      "description": "Specify the Datetime after which you want to ingest feeds",
+      "name": "last_pull_datetime",
+      "type": "datetime",
+      "tooltip": "Specify the Datetime after which you want to ingest feeds",
+      "required": true,
+      "editable": true,
+      "visible": true
+    },
     {
       "title": "TLP",
+      "description": "Default TLP to be set for the feeds",
       "name": "tlp",
       "type": "select",
       "tooltip": "Default TLP to be set for the feeds",
@@ -157,56 +165,62 @@
       ],
       "value": "Amber"
     },
-        {
-            "title": "Maximum Age (in days)",
-            "name": "expiry",
-            "type": "integer",
-            "tooltip": "Default age for the feeds. The indicator expires on 'valid_until' date unless a different expiry is specified here. If specified, the indicator will be marked expired on valid_until + expiry.",
-            "required": false,
-            "editable": true,
-            "visible": true,
-            "value": 7
-        },
-         {
-            "title": "Feed Fetch Depth",
-            "name": "depth",
-            "type": "integer",
-            "tooltip": "Select the period in days to retrieve indicators",
-            "required": true,
-            "editable": true,
-            "visible": true,
-            "value": 30
-        },
-
-{
-    "title": "Collection Type",
-    "name": "collection",
-    "type": "select",
-    "tooltip": "Specify the type of the collection from which to retrieve the indicators",
-    "required": true,
-    "editable": true,
-    "visible": true,
-    "options": ["full", "ip", "domain", "url"],
-    "value": "full"
-  }
-
-    ],
-    "ingest_mapping_template": {
-        "tlp": "{% if vars.tlp %}{{ vars.tlp }}{% endif %}",
-        "value": "{{vars.pattern.split('= ')[-1].strip().replace(\" \",\"\")[1:-2]}}",
-        "source": "ANY.RUN Threat Intelligence Feeds",
-        "pattern": "{{ vars.pattern }}",
-        "created_on": "{% if vars.created %}{{epoch_to_datetime(arrow.get(vars.created).int_timestamp + (vars.created | int)*24*60*60)}}{% else %}{{ epoch_to_datetime(arrow.utcnow().int_timestamp) }}{% endif %}",
-        "modified_on": "{% if vars.modified %}{{epoch_to_datetime(arrow.get(vars.modified).int_timestamp + (vars.modified | int)*24*60*60)}}{% else %}{{ epoch_to_datetime(arrow.utcnow().int_timestamp) }}{% endif %}",
-        "source_id": "{{ vars.id }}",
-        "__replace": "",
-        "expires_on": "{% if vars.expiry %}{{ epoch_to_datetime(arrow.utcnow().int_timestamp + (vars.expiry | int)*24*60*60) }}{% else %}None{% endif %}",
-        "valid_from": "{% if vars.valid_from %}{{epoch_to_datetime(arrow.get(vars.valid_from).int_timestamp + (vars.valid_from | int)*24*60*60)}}{% else %}{{ epoch_to_datetime(arrow.utcnow().int_timestamp) }}{% endif %}",
-        "valid_until": "{% if vars.valid_until %}{{ epoch_to_datetime(arrow.get(vars.valid_until).int_timestamp + (vars.expiry | int)*24*60*60) }}{% else %}{{ epoch_to_datetime(arrow.utcnow().int_timestamp + (vars.expiry | int)*24*60*60) }}{% endif %}",
-        "confidence": "{% if vars.confidence %}{{ vars.confidence }}{% endif %}",
-        "reputation": "{% if vars.reputation %}{{ vars.reputation }}{% endif %}",
-        "sourceData": "{{ vars | toJSON}}",
-        "type_of_feed": "{% if vars.pattern %}{{ vars.pattern.split(\" =\")[0].strip()[1:].replace(\":\", \"-\").replace(\".\", \"-\").replace(\"'\", \"\").replace(\" \", \"\") }}{% else %}None{% endif %}",
-        "description": "{% if vars.description %}{{ vars.description }}{% else %} Threat Indicator from ANY.RUN Threat Intelligence Feeds for pattern: {{ vars.pattern }}{% endif %}"
+    {
+      "title": "Maximum Age (in days)",
+      "description": "Default age for the feeds. The indicator expires on 'valid_until' date unless a different expiry is specified here. If specified, the indicator will be marked expired on valid_until + expiry.",
+      "name": "expiry",
+      "type": "integer",
+      "tooltip": "Default age for the feeds. The indicator expires on 'valid_until' date unless a different expiry is specified here. If specified, the indicator will be marked expired on valid_until + expiry.",
+      "required": false,
+      "editable": true,
+      "visible": true,
+      "value": 7
+    },
+    {
+      "title": "Feed Fetch Depth",
+      "description": "Select the period in days to retrieve indicators",
+      "name": "depth",
+      "type": "integer",
+      "tooltip": "Select the period in days to retrieve indicators",
+      "required": true,
+      "editable": true,
+      "visible": true,
+      "value": 30
+    },
+    {
+      "title": "Collection Type",
+      "description": "Specify the type of the collection from which to retrieve the indicators",
+      "name": "collection",
+      "type": "select",
+      "tooltip": "Specify the type of the collection from which to retrieve the indicators",
+      "required": true,
+      "editable": true,
+      "visible": true,
+      "options": [
+        "Full",
+        "IP",
+        "Domain",
+        "URL"
+      ],
+      "value": "Full"
     }
+  ],
+  "ingest_mapping_template": {
+    "tlp": "{% if vars.tlp %}{{ vars.tlp }}{% endif %}",
+    "value": "{{vars.pattern.split('= ')[-1].strip().replace(\" \",\"\")[1:-2]}}",
+    "source": "ANY.RUN Threat Intelligence Feeds",
+    "pattern": "{{ vars.pattern }}",
+    "created_on": "{% if vars.created %}{{epoch_to_datetime(arrow.get(vars.created).int_timestamp + (vars.created | int)*24*60*60)}}{% else %}{{ epoch_to_datetime(arrow.utcnow().int_timestamp) }}{% endif %}",
+    "modified_on": "{% if vars.modified %}{{epoch_to_datetime(arrow.get(vars.modified).int_timestamp + (vars.modified | int)*24*60*60)}}{% else %}{{ epoch_to_datetime(arrow.utcnow().int_timestamp) }}{% endif %}",
+    "source_id": "{{ vars.id }}",
+    "__replace": "",
+    "expires_on": "{% if vars.expiry %}{{ epoch_to_datetime(arrow.utcnow().int_timestamp + (vars.expiry | int)*24*60*60) }}{% else %}None{% endif %}",
+    "valid_from": "{% if vars.valid_from %}{{epoch_to_datetime(arrow.get(vars.valid_from).int_timestamp + (vars.valid_from | int)*24*60*60)}}{% else %}{{ epoch_to_datetime(arrow.utcnow().int_timestamp) }}{% endif %}",
+    "valid_until": "{% if vars.valid_until %}{{ epoch_to_datetime(arrow.get(vars.valid_until).int_timestamp + (vars.expiry | int)*24*60*60) }}{% else %}{{ epoch_to_datetime(arrow.utcnow().int_timestamp + (vars.expiry | int)*24*60*60) }}{% endif %}",
+    "confidence": "{% if vars.confidence %}{{ vars.confidence }}{% endif %}",
+    "reputation": "{% if vars.reputation %}{{ vars.reputation }}{% endif %}",
+    "sourceData": "{{ vars | toJSON}}",
+    "type_of_feed": "{% if vars.pattern %}{{ vars.pattern.split(\" =\")[0].strip()[1:].replace(\":\", \"-\").replace(\".\", \"-\").replace(\"'\", \"\").replace(\" \", \"\") }}{% else %}None{% endif %}",
+    "description": "{% if vars.description %}{{ vars.description }}{% else %} Threat Indicator from ANY.RUN Threat Intelligence Feeds for pattern: {{ vars.pattern }}{% endif %}"
+  }
 }

@@ -1,3 +1,10 @@
+"""
+Copyright start
+MIT License
+Copyright (c) 2026 Fortinet Inc
+Copyright end
+"""
+
 import traceback
 from connectors.cyops_utilities.builtins import create_file_from_string
 from connectors.core.connector import get_logger, ConnectorError
@@ -25,6 +32,7 @@ logger = get_logger('anyrun-threat-intelligence-feeds')
 
 def exceptions_handler(function):
     """ Handles errors in functions """
+
     def wrapper(*args, **kwargs):
 
         try:
@@ -53,7 +61,7 @@ def fetch_indicators(config, params, **kwargs):
     """ Fetch indicators from the ANY.RUN TI Feeds and saves them according to the specified parameters """
     params = get_params(params)
     mode = params.get('output_mode')
-    collection = params.get('collectionType')
+    collection = params.get('collectionType').lower()
     fetch_depth = params.get('feedFetchDepth')
     token = config.get('apiKey')
     verify_ssl = config.get('verify_ssl')
@@ -62,13 +70,13 @@ def fetch_indicators(config, params, **kwargs):
 
     with FeedsConnector(api_key=token, integration=VERSION, verify_ssl=verify_ssl) as connector:
         for feeds in FeedsIterator.taxii_stix(
-            connector,
-            collection=collection,
-            match_type='indicator',
-            match_version='all',
-            chunk_size=1000,
-            modified_after=(
-                datetime.now() - timedelta(days=fetch_depth)
+                connector,
+                collection=collection,
+                match_type='indicator',
+                match_version='all',
+                chunk_size=1000,
+                modified_after=(
+                        datetime.now() - timedelta(days=fetch_depth)
                 ).strftime(DATE_TIME_FORMAT)
         ):
             for feed in feeds:
@@ -79,7 +87,8 @@ def fetch_indicators(config, params, **kwargs):
 
     if mode == 'Create as Feed Records in FortiSOAR':
         create_pb_id = params.get("create_pb_id")
-        trigger_ingest_playbook(deduped_indicators, create_pb_id, parent_env=kwargs.get('env', {}), batch_size=1000, dedup_field="pattern")
+        trigger_ingest_playbook(deduped_indicators, create_pb_id, parent_env=kwargs.get('env', {}), batch_size=1000,
+                                dedup_field="pattern")
         return 'Successfully triggered playbooks to create feed records'
 
     objects = {'objects': deduped_indicators}

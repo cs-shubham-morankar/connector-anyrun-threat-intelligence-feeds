@@ -24,29 +24,29 @@
       "indicators"
     ]
   },
-  "help_online": "",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/1.0.0/any-run-threat-intelligence-feeds/100/any-run-threat-intelligence-feeds-v1-0-0",
   "configuration": {
     "fields": [
       {
         "title": "API Key",
-        "description": "API Key of the ANY.RUN endpoint server to connect and perform the automated operations.",
+        "description": "Specify the API key used to authenticate with the ANY.RUN Threat Intelligence Feeds API. The format of the API Key must be: NS9sY..FwvfR.",
         "type": "password",
         "name": "apiKey",
         "required": true,
         "visible": true,
         "editable": true,
-        "tooltip": "API Key of the ANY.RUN endpoint server to connect and perform the automated operations."
+        "tooltip": "Specify the API key used to authenticate with the ANY.RUN Threat Intelligence Feeds API. The format of the API Key must be: NS9sY..FwvfR."
       },
       {
         "title": "Verify SSL",
-        "description": "Specifies whether the SSL certificate for the server is to be verified or not. By default, this option is set as True.",
+        "description": "Specifies whether the SSL certificate for the server is to be verified. By default, this option is set to True.",
         "type": "checkbox",
         "name": "verify_ssl",
         "required": false,
         "visible": true,
         "editable": true,
         "value": true,
-        "tooltip": "Specifies whether the SSL certificate for the server is to be verified or not. By default, this option is set as True."
+        "tooltip": "Specifies whether the SSL certificate for the server is to be verified. By default, this option is set to True."
       }
     ]
   },
@@ -54,7 +54,7 @@
     {
       "operation": "fetch_indicators",
       "title": "Fetch Indicators",
-      "description": "Retrieves all available indicators of a specific collection from ANY.RUN TAXII Server based on the collection type and other input parameters you have specified.",
+      "description": "Retrieves indicators of compromise (IOCs) from the ANY.RUN TAXII server for the specified collection, time range, and other input parameters.",
       "category": "investigation",
       "annotation": "fetch_indicators",
       "api_output_schema": "get_output_schema",
@@ -62,14 +62,14 @@
       "parameters": [
         {
           "title": "Collection type",
-          "description": "Specify the type of the collection from which to retrieve the indicators. Possible values are IP, URL, Domain, or Full.",
+          "description": "Specify the type of collection from which to retrieve indicators. Possible values are IP, URL, Domain, or Full.",
           "type": "select",
           "name": "collectionType",
           "required": true,
           "visible": true,
           "editable": true,
           "value": "Full",
-          "tooltip": "Specify the type of the collection from which to retrieve the indicators. Possible values are IP, URL, Domain, or Full.",
+          "tooltip": "Specify the type of collection from which to retrieve indicators. Possible values are IP, URL, Domain, or Full.",
           "options": [
             "IP",
             "URL",
@@ -79,25 +79,25 @@
         },
         {
           "title": "Feed Fetch Depth",
-          "description": "Select the period in days to retrieve indicators.",
+          "description": "(Optional) Specify the number of days to retrieve indicators.",
           "type": "integer",
           "name": "feedFetchDepth",
           "required": false,
           "visible": true,
           "editable": true,
           "value": 30,
-          "tooltip": "Select the period in days to retrieve indicators."
+          "tooltip": "Specify the number of days to retrieve indicators."
         },
         {
           "title": "Process Response As",
-          "description": "The Feed Data can either be returned as a JSON; written to a file on the FortiSOAR server; or Created as Feed Records in FortiSOAR",
+          "description": "(Optional) Select how FortiSOAR should process the retrieved indicators. Available options are: \n-Create as Feed Records in FortiSOAR: Creates Threat Intel Feed records in FortiSOAR. If you select this option, then in the Record Creation Playbook IRI field, specify the IRI of the Record Creation Playbook. \n-Save to File: Saves the retrieved indicators to a file on the FortiSOAR server. If you select this option, then in the Filename field, specify the name of the file in which to save the feed information. -Return as JSON: Returns the retrieved indicators in JSON format. If you select this option, then there are no additional input parameters.",
           "type": "select",
           "name": "output_mode",
           "required": false,
           "visible": true,
           "editable": true,
           "value": "Return as a JSON",
-          "tooltip": "The Feed Data can either be returned as a JSON; written to a file on the FortiSOAR server; or Created as Feed Records in FortiSOAR",
+          "tooltip": "(Optional) Select how FortiSOAR should process the retrieved indicators. Available options are: \n-Create as Feed Records in FortiSOAR: Creates Threat Intel Feed records in FortiSOAR. If you select this option, then in the Record Creation Playbook IRI field, specify the IRI of the Record Creation Playbook. \n-Save to File: Saves the retrieved indicators to a file on the FortiSOAR server. If you select this option, then in the Filename field, specify the name of the file in which to save the feed information. \n-Return as JSON: Returns the retrieved indicators in JSON format. If you select this option, then there are no additional input parameters. ",
           "options": [
             "Create as Feed Records in FortiSOAR",
             "Save to File",
@@ -107,8 +107,8 @@
             "Create as Feed Records in FortiSOAR": [
               {
                 "title": "Record Creation Playbook IRI",
-                "description": "Specify the IRI of the Record Creation Playbook in Record Creation Playbook IRI field.",
-                "tooltip": "Specify the IRI of the Record Creation Playbook in Record Creation Playbook IRI field.",
+                "description": "Specify the IRI of the Record Creation Playbook.",
+                "tooltip": "Specify the IRI of the Record Creation Playbook.",
                 "type": "text",
                 "name": "create_pb_id",
                 "required": false,
@@ -127,7 +127,7 @@
                 "required": true,
                 "placeholder": "Eg. feeds.json",
                 "tooltip": "Specify the name of the file in which to save the feed information, in the Filename field. The file will be created under /tmp",
-                "description": "Specify the name of the file in which to save the feed information, in the Filename field."
+                "description": "Specify the name of the file in which to save the feed information."
               }
             ]
           }

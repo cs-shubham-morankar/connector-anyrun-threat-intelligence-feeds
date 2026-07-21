@@ -3,7 +3,7 @@
   "data": [
     {
       "@type": "WorkflowCollection",
-      "name": "Sample - ANY.RUN Threat Intelligence Feeds - 1.0.0",
+      "name": "Sample - ANY.RUN Threat Intelligence Feeds - 1.1.0",
       "description": "Sample playbooks for \"ANY.RUN Threat Intelligence Feeds\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete.",
       "visible": true,
       "image": null,
@@ -112,7 +112,7 @@
                   "collectionType": "{{vars.collection}}",
                   "feedFetchDepth": "{{vars.depth}}"
                 },
-                "version": "1.0.0",
+                "version": "1.1.0",
                 "connector": "anyrun-threat-intelligence-feeds",
                 "operation": "fetch_indicators",
                 "operationTitle": "Fetch Indicators",
@@ -316,7 +316,7 @@
                   "collectionType": "full",
                   "feedFetchDepth": 30
                 },
-                "version": "1.0.0",
+                "version": "1.1.0",
                 "connector": "anyrun-threat-intelligence-feeds",
                 "operation": "fetch_indicators",
                 "operationTitle": "Fetch Indicators",

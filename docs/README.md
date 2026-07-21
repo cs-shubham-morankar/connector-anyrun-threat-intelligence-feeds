@@ -13,11 +13,11 @@ Use the Data Ingestion Wizard to easily ingest Threat Intelligence Feeds data in
 
 ### Version information
 
-- Connector Version: 1.0.0
+- Connector Version: 1.1.0
 - FortiSOAR™ Version Tested on: 7.6.4-5623
 - Authored By: ANY.RUN
 
-## Release Notes for version 1.0.0
+## Release Notes for version 1.1.0
 
 - Connector: ANY.RUN Threat Intelligence Feeds. TI Feeds provide data on the known indicators of compromise such as malicious IPs, URLs, Domains.
 - Playbooks: Use the Data Ingestion Wizard to easily ingest data into FortiSOAR™ by pulling data from the ANY.RUN Threat Intelligence Feeds  using this playbook:
@@ -113,7 +113,7 @@ If you choose 'Return as a JSON', the output contains the following populated JS
 
 ## Included playbooks
 
-The `Sample - ANY.RUN Threat Intelligence Feeds - 1.0.0` playbook collection comes bundled with the ANY.RUN Threat Intelligence Feeds connector. These playbooks contain steps using which you can perform all supported actions. You can see bundled playbooks in the **Automation** > **Playbooks** section in FortiSOAR™ after importing the ANY.RUN Threat Intelligence Feeds connector.
+The `Sample - ANY.RUN Threat Intelligence Feeds - 1.1.0` playbook collection comes bundled with the ANY.RUN Threat Intelligence Feeds connector. These playbooks contain steps using which you can perform all supported actions. You can see bundled playbooks in the **Automation** > **Playbooks** section in FortiSOAR™ after importing the ANY.RUN Threat Intelligence Feeds connector.
 
 - > ANY.RUN Threat Intelligence Feeds > Fetch and Create
 - Fetch Indicators

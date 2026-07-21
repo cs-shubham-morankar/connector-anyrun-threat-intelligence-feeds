@@ -1,14 +1,14 @@
 {
   "name": "anyrun-threat-intelligence-feeds",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "label": "ANY.RUN Threat Intelligence Feeds",
   "description": "The ANY.RUN Threat Intelligence Feeds connector FortiSOAR users with continuously updated, high-fidelity IOCs (malicious IPs, domains, and URLs) extracted from live sandbox analyses across 15,000+ SOCs. This enables proactive defense against emerging threats with rich context including sandbox session links for faster triage and response. <br/><br/>With TI Feeds, you SOC can ensure: \n- Early threat detection using real-time IOCs from the latest emerging malware & phishing, catching attacks hours before they hit. \n- More effective Tier 1 as analysts will be able to resolve more alerts without escalation thanks to clear indicator context. \n- Lightning-fast MTTR with TTPs and behavior insights from sandbox reports, enabling automated triage and response in minutes.\n\n<br/><br/>This connector has a dependency on the <a href=\"/content-hub/all-content/?contentType=solutionpack&amp;tag=ThreatIntelManagement\" target=\"_blank\" rel=\"noopener\">Threat Intel Management Solution Pack</a>. Install the Solution Pack before enabling ingestion of Threat Feeds from this source.",
-  "publisher": "ANY.RUN",
+  "publisher": "Fortinet",
   "icon_small_name": "small.png",
   "icon_large_name": "large.png",
   "category": "Threat Intelligence",
-  "contributor": "Semen Shalnev",
-  "cs_approved": false,
+  "contributor": "ANY.RUN",
+  "cs_approved": true,
   "cs_compatible": true,
   "ingestion_supported": true,
   "ingestion_modes": [
@@ -24,7 +24,7 @@
       "indicators"
     ]
   },
-  "help_online": "https://docs.fortinet.com/document/fortisoar/1.0.0/any-run-threat-intelligence-feeds/100/any-run-threat-intelligence-feeds-v1-0-0",
+  "help_online": "",
   "configuration": {
     "fields": [
       {

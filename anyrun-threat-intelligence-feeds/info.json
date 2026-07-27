@@ -8,7 +8,7 @@
   "icon_large_name": "large.png",
   "category": "Threat Intelligence",
   "contributor": "ANY.RUN",
-  "cs_approved": true,
+  "cs_approved": false,
   "cs_compatible": true,
   "ingestion_supported": true,
   "ingestion_modes": [
